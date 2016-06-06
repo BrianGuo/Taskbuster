@@ -1,2 +1,4 @@
 -r base.txt
-selenium==2.48.0
+selenium==2.53.2
+coverage==4.1
+pytz==2016.4
