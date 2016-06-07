@@ -9,6 +9,9 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
         home_files, name='home-files'),
+    url(r'^accounts/logout/$',
+        'django.contrib.auth.views.logout', {'next_page': '/'}),
+    url(r'^accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += i18n_patterns(
