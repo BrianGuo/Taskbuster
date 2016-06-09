@@ -1,1 +1,3 @@
 -r base.txt
+django-toolbelt
+dj_database_url
