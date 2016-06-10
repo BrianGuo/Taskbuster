@@ -14,7 +14,7 @@ DATABASES = {
         'NAME': 'taskbuster_db',
         'USER': 'myusername',
         'PASSWORD': 'mypassword',
-        'HOST': '/tmp',
+        'HOST': 'brianstaskbuster.herokuapp.com',
         'PORT': '',
         }
     }
