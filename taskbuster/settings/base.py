@@ -24,6 +24,7 @@ LANGUAGES = (
 LANGUAGE_CODE = 'en-us'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
@@ -37,7 +38,7 @@ LOCALE_PATHS = (
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -91,7 +93,10 @@ WSGI_APPLICATION = 'taskbuster.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.backends.sqlite3',
+        'NAME': os.path.join(PROJECT_ROOT, 'db.sqlite3')
+    }
 }
 # ------------------------   Google Authentication  -------------------
 # Authentication Backend
@@ -113,7 +118,7 @@ INSTALLED_APPS += (
     'allauth.socialaccount.providers.google',
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 # Custom Parameters for Authentication Process
 ACCOUNT_USERNAME_REQUIRED = False
@@ -131,7 +136,7 @@ def get_env_variable(var_name):
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY = 'your_secret_key_here'
+SECRET_KEY = get_env_variable('SECRET_KEY')
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -150,6 +155,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )

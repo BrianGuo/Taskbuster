@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 from .base import *
-DEBUG = False
+import dj_database_url
+
+DEBUG = True
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+SITE_ID = 3
+ALLOWED_HOSTS_ = ['brianstaskbuster.herokuapp.com']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DATABASES['default'] = dj_database_url.config(conn_max_age=500)
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -8,6 +15,6 @@ DATABASES = {
         'USER': 'myusername',
         'PASSWORD': 'mypassword',
         'HOST': '',
-        'PORT': '',
+        'PORT': '',`
         }
     }
