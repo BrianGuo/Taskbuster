@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from .base import *
 import dj_database_url
+import urllib.parse
 
 DEBUG = True
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
@@ -14,7 +15,7 @@ DATABASES = {
         'NAME': 'taskbuster_db',
         'USER': 'myusername',
         'PASSWORD': 'mypassword',
-        'HOST': 'localhost',
+        'HOST': url.hostname,
         'PORT': '',
         }
     }
