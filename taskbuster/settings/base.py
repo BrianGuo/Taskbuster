@@ -15,6 +15,8 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
 import dj_database_url
+import urllib.parse
+from urllib.parse import urlparse
 
 LANGUAGES = (
     ('en', _('English')),
@@ -161,3 +163,28 @@ STATICFILES_DIRS = (
 )
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+urllib.parse.uses_netloc.append('postgres')
+
+try:
+    if 'DATABASES' not in locals():
+        DATABASES = {}
+
+    if 'DATABASE_URL' in os.environ:
+        url = urlparse.urlparse(os.environ['DATABASE_URL'])
+
+        DATABASES['default'] = DATABASES.get('default', {})
+
+        DATABASES['default'].update({
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+            })
+
+        if url.scheme == 'postgres':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+except EXCEPTION:
+    print ('Unexpected error:'.sys.exec_info())
