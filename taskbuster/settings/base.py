@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
+import dj_database_url
 
 LANGUAGES = (
     ('en', _('English')),
@@ -36,7 +37,7 @@ LOCALE_PATHS = (
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -90,10 +91,7 @@ WSGI_APPLICATION = 'taskbuster.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
 # ------------------------   Google Authentication  -------------------
 # Authentication Backend
@@ -125,6 +123,7 @@ LOGIN_REDIRECT_URL = "/"
 # ------------------------------------------------------------------------
 # Secret Key
 
+
 def get_env_variable(var_name):
     try:
         return os.environ[var_name]
@@ -132,7 +131,7 @@ def get_env_variable(var_name):
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY = get_env_variable('SECRET_KEY')
+SECRET_KEY = 'your_secret_key_here'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -154,3 +153,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
