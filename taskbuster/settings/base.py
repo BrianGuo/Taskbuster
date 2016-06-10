@@ -187,4 +187,4 @@ try:
             DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 except Exception:
-    print ('Unexpected error:'.sys.exec_info())
+    print ('Unexpected error:' + sys.exec_info())
