@@ -186,5 +186,5 @@ try:
         if url.scheme == 'postgres':
             DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
-except EXCEPTION:
+except Exception:
     print ('Unexpected error:'.sys.exec_info())
