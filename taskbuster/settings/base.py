@@ -180,7 +180,7 @@ try:
             'NAME': url.path[1:],
             'USER': url.username,
             'PASSWORD': url.password,
-            'HOST': url.hostname,
+            'HOST': '/tmp',
             'PORT': url.port,
             })
 
