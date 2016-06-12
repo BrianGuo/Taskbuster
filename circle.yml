@@ -9,5 +9,7 @@ machine:
     DATABASE_NAME : 'circle_test'
     DATABASE_USER : 'ubuntu'
     DATABASE_PASSWORD : ''
+    email : 'brianguosh@gmail.com'
+    password : donottell
   python:
     version : 3.5.0

@@ -55,6 +55,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ImproperlyConfigured
+import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.utils.translation import activate
 
@@ -71,6 +73,13 @@ class TestGoogleLogin(StaticLiveServerTestCase):
 
     def tearDown(self):
         self.browser.quit()
+
+    def get_env_variable(var_name):
+        try:
+            return os.environ[var_name]
+        except KeyError:
+            error_msg = "Set the %s environment variable" % var_name
+            raise ImproperlyConfigured(error_msg)
 
     def get_element_by_id(self, element_id):
         return self.browser.wait.until(EC.presence_of_element_located(
@@ -96,6 +105,15 @@ class TestGoogleLogin(StaticLiveServerTestCase):
             self.get_button_by_id(btn).click()
         return
 
+    def environment_login(self):
+        email = get_env_variable('email')
+        password = get_env_variable('password')
+        self.get_element_by_id("Email").send_keys(email)
+        self.get_button_by_id("next").click()
+        self.get_element_by_id("Passwd").send_keys(password)
+        for btn in ["signIn", "submit_approve_access"]:
+            self.get_button_by_id(btn).click()
+
     def test_google_login(self):
         self.browser.get(self.get_full_url("home"))
         google_login = self.get_element_by_id("google_login")
@@ -105,7 +123,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
             google_login.get_attribute("href"),
             self.live_server_url + "/accounts/google/login")
         google_login.click()
-        self.user_login()
+        self.environment_login()
         with self.assertRaises(TimeoutException):
             self.get_element_by_id("google_login")
         google_logout = self.get_element_by_id("logout")
