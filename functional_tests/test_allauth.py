@@ -111,7 +111,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
 
     def get_button_by_class(self, element_class):
         return self.browser.wait.until(EC.element_to_be_clickable(
-            (By.CLASS, element_class)))
+            (By.CLASS_NAME, element_class)))
 
     def get_full_url(self, namespace):
         return self.live_server_url + reverse(namespace)
