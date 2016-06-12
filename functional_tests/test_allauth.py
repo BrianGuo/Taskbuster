@@ -74,7 +74,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def get_env_variable(var_name):
+    def get_env_variable(self, var_name):
         try:
             return os.environ[var_name]
         except KeyError:
