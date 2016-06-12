@@ -108,6 +108,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
     def environment_login(self):
         email = self.get_env_variable('email')
         password = self.get_env_variable('password')
+        print (self.get_element_by_id("Email"))
         self.get_element_by_id("Email").send_keys(email)
         self.get_button_by_id("next").click()
         self.get_element_by_id("Passwd").send_keys(password)
