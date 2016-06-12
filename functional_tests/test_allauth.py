@@ -56,7 +56,7 @@ from selenium.common.exceptions import TimeoutException
 
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ImproperlyConfigured
-import os
+import os, sys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.utils.translation import activate
 
@@ -70,6 +70,22 @@ class TestGoogleLogin(StaticLiveServerTestCase):
         self.browser.implicitly_wait(3)
         self.browser.wait = WebDriverWait(self.browser, 10)
         activate('en')
+
+    @classmethod
+    def setUpClass(cls):
+        for arg in sys.argv:
+            if 'liveserver' in arg:
+                cls.server_url = 'http://' + arg.split('=')[1]
+                cls.live_server_url = cls.server_url
+                return
+
+        super().setUpClass()
+        cls.server_url = cls.live_server_url
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.server_url == cls.live_server_url:
+            super().tearDownClass()
 
     def tearDown(self):
         self.browser.quit()
