@@ -3,3 +3,4 @@ deployment:
     branch: master
     heroku:
       appname: brianstaskbuster
+export SECRET_KEY='your_secret_key_here'
