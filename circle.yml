@@ -8,5 +8,6 @@ machine:
     SECRET_KEY : 'your_secret_key_here'
     DATABASE_NAME : 'circle_test'
     DATABASE_USER : 'ubuntu'
+    DATABASE_PASSWORD : ''
   python:
     version : 3.5.0
