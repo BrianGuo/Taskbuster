@@ -8,8 +8,8 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 SITE_ID = 3
 ALLOWED_HOSTS_ = ['brianstaskbuster.herokuapp.com']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-DATABASES['default'] = dj_database_url.config(conn_max_age=500)
-"""DATABASES = {
+#DATABASES['default'] = dj_database_url.config(conn_max_age=500)
+DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'taskbuster_db',
@@ -18,6 +18,6 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=500)
         'HOST': '',
         'PORT': '',
         }
-    }"""
+    }
 
 #DATABASES['default'] = dj_database_url.config()
