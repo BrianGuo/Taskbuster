@@ -6,8 +6,7 @@ deployment:
 machine:
   environment:
     SECRET_KEY : 'your_secret_key_here'
-    DATABASE_NAME : 'taskbuster_db'
-    DATABASE_USER : 'myusername'
-    DATABASE_PASSWORD : 'mypassword'
+    DATABASE_NAME : 'circle_test'
+    DATABASE_USER : 'ubuntu'
   python:
     version : 3.5.0
