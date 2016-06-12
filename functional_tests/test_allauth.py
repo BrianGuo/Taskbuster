@@ -54,6 +54,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
+from django.test import RequestFactory
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ImproperlyConfigured
 import os, sys
@@ -70,8 +72,10 @@ class TestGoogleLogin(StaticLiveServerTestCase):
         self.browser.implicitly_wait(3)
         self.browser.wait = WebDriverWait(self.browser, 10)
         activate('en')
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(username='sammy', email='s@g.com', password='123')
 
-    """@classmethod
+    @classmethod
     def setUpClass(cls):
         for arg in sys.argv:
             if 'liveserver' in arg:
@@ -85,7 +89,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
     @classmethod
     def tearDownClass(cls):
         if cls.server_url == cls.live_server_url:
-            super().tearDownClass()"""
+            super().tearDownClass()
 
     def tearDown(self):
         self.browser.quit()
@@ -122,23 +126,23 @@ class TestGoogleLogin(StaticLiveServerTestCase):
         return
 
     def environment_login(self):
-        email = self.get_env_variable('email')
+        username = self.get_env_variable('username')
         password = self.get_env_variable('password')
-        print (self.get_element_by_id("Email"))
+        print (self.get_element_by_id("id_login"))
         self.get_element_by_id("Email").send_keys(email)
         self.get_button_by_id("next").click()
         self.get_element_by_id("Passwd").send_keys(password)
         for btn in ["signIn", "submit_approve_access"]:
             self.get_button_by_id(btn).click()
 
-    def test_google_login(self):
+    def test_email_login(self):
         self.browser.get(self.get_full_url("home"))
         google_login = self.get_element_by_id("google_login")
         with self.assertRaises(TimeoutException):
             self.get_element_by_id("logout")
         self.assertEqual(
             google_login.get_attribute("href"),
-            self.live_server_url + "/accounts/google/login")
+            self.live_server_url + "/accounts/login")
         google_login.click()
         self.environment_login()
         with self.assertRaises(TimeoutException):
