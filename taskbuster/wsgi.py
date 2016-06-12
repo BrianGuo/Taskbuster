@@ -12,6 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 #from dj_static import Cling
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "taskbuster.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "taskbuster.settings.development")
 
 application = get_wsgi_application()
