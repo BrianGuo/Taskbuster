@@ -3,9 +3,9 @@ deployment:
     branch: master
     commands:
       - heroku config:set --app brianstaskbuster
-      - heroku config:set DATABASE_NAME=dc6t0opmjup491
-      - heroku config:set DATABASE_USER=baonxmnmijnaci
-      - heroku config:set DATABASE_PASSWORD=IrwCwPD48VPmh__DDVxmDkau5ay
+      - heroku config:set DATABASE_NAME=dc6t0opmjup491 --app brianstaskbuster
+      - heroku config:set DATABASE_USER=baonxmnmijnaci --app brianstaskbuster
+      - heroku config:set DATABASE_PASSWORD=IrwCwPD48VPmh__DDVxmDkau5ay --app brianstaskbuster
       - git push heroku master
 
 machine:
