@@ -133,7 +133,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
         username = self.get_env_variable('username')
         password = self.get_env_variable('password')
         self.get_element_by_id("id_login").send_keys(username)
-        self.get_element_by_id("password").send_keys(password)
+        self.get_element_by_id("id_password").send_keys(password)
         self.get_button_by_class("primaryAction").click()
 
     def test_email_login(self):
