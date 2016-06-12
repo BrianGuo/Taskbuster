@@ -109,6 +109,10 @@ class TestGoogleLogin(StaticLiveServerTestCase):
         return self.browser.wait.until(EC.element_to_be_clickable(
             (By.ID, element_id)))
 
+    def get_button_by_class(self, element_class):
+        return self.browser.wait.until(EC.element_to_be_clickable(
+            (By.Class, element_class)))
+
     def get_full_url(self, namespace):
         return self.live_server_url + reverse(namespace)
 
@@ -128,12 +132,9 @@ class TestGoogleLogin(StaticLiveServerTestCase):
     def environment_login(self):
         username = self.get_env_variable('username')
         password = self.get_env_variable('password')
-        print (self.get_element_by_id("id_login"))
-        self.get_element_by_id("Email").send_keys(email)
-        self.get_button_by_id("next").click()
-        self.get_element_by_id("Passwd").send_keys(password)
-        for btn in ["signIn", "submit_approve_access"]:
-            self.get_button_by_id(btn).click()
+        self.get_element_by_id("id_login").send_keys(username)
+        self.get_element_by_id("password").send_keys(password)
+        self.get_button_by_class("primaryAction").click()
 
     def test_email_login(self):
         self.browser.get(self.get_full_url("home"))
