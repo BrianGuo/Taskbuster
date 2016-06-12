@@ -23,6 +23,8 @@ LANGUAGES = (
     ('ca', _('Catalan'))
 )
 
+SITE_ID = 1
+
 LANGUAGE_CODE = 'en-us'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -120,7 +122,7 @@ INSTALLED_APPS += (
     'allauth.socialaccount.providers.google',
 )
 
-SITE_ID = 1
+
 
 # Custom Parameters for Authentication Process
 ACCOUNT_USERNAME_REQUIRED = False
