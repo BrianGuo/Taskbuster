@@ -120,7 +120,7 @@ INSTALLED_APPS += (
     'allauth.socialaccount.providers.google',
 )
 
-SITE_ID = 2
+SITE_ID = 1
 
 # Custom Parameters for Authentication Process
 ACCOUNT_USERNAME_REQUIRED = False
