@@ -6,4 +6,5 @@ deployment:
 machine:
   environment:
     SECRET_KEY : 'your_secret_key_here'
-
+  python:
+    version : python-3.5.1
