@@ -71,7 +71,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
         self.browser.wait = WebDriverWait(self.browser, 10)
         activate('en')
 
-    @classmethod
+    """@classmethod
     def setUpClass(cls):
         for arg in sys.argv:
             if 'liveserver' in arg:
@@ -85,7 +85,7 @@ class TestGoogleLogin(StaticLiveServerTestCase):
     @classmethod
     def tearDownClass(cls):
         if cls.server_url == cls.live_server_url:
-            super().tearDownClass()
+            super().tearDownClass()"""
 
     def tearDown(self):
         self.browser.quit()
